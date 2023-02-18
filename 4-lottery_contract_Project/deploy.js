@@ -1,13 +1,14 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
-const { interface, bytecode } = require('./compile');
+const { abi, evm } = require('./compile');
 
 const provider = new HDWalletProvider(
-  'REPLACE_WITH_YOUR_MNEMONIC',
-  // lembre-se de mudar isso para sua própria frase!
-  'https://rinkeby.infura.io/v3/15c1d32581894b88a92d8d9e519e476c'
-  // lembre-se de alterar isso para seu próprio ponto final!
+  'YOUR_MNEMONIC',
+  // remember to change this to your own phrase!
+  'YOUR_INFURA_URL'
+  // remember to change this to your own endpoint!
 );
+
 const web3 = new Web3(provider);
 
 const deploy = async () => {
@@ -15,10 +16,11 @@ const deploy = async () => {
 
   console.log('Attempting to deploy from account', accounts[0]);
 
-  const result = await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({ data: bytecode })
+  const result = await new web3.eth.Contract(abi)
+    .deploy({ data: evm.bytecode.object })
     .send({ gas: '1000000', from: accounts[0] });
 
+  console.log(JSON.stringify(abi));
   console.log('Contract deployed to', result.options.address);
   provider.engine.stop();
 };

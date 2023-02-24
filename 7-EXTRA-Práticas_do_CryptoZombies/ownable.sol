@@ -1,7 +1,7 @@
 /**
  * @title Ownable
- * @dev The Ownable contract has an owner address, and provides basic authorization control
- * functions, this simplifies the implementation of "user permissions".
+ * @dev O contrato de propriedade tem um endereço de proprietário, e fornece controle básico de autorização
+ * funciona, o que simplifica a implementação das "permissões de usuário".
  */
 contract Ownable {
   address public owner;
@@ -9,8 +9,8 @@ contract Ownable {
   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
   /**
-   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-   * account.
+   * @dev O construtor proprietário define o "proprietário" original do contrato para o remetente
+   * conta.
    */
   function Ownable() public {
     owner = msg.sender;
@@ -18,7 +18,7 @@ contract Ownable {
 
 
   /**
-   * @dev Throws if called by any account other than the owner.
+   * @dev Lança se for chamado por qualquer conta que não seja o proprietário.
    */
   modifier onlyOwner() {
     require(msg.sender == owner);
@@ -27,8 +27,8 @@ contract Ownable {
 
 
   /**
-   * @dev Allows the current owner to transfer control of the contract to a newOwner.
-   * @param newOwner The address to transfer ownership to.
+   * @dev Permite ao atual proprietário transferir o controle do contrato para um novo proprietário.
+   * @param newOwner O endereço para o qual transferir a propriedade.
    */
   function transferOwnership(address newOwner) public onlyOwner {
     require(newOwner != address(0));
